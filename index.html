@@ -14,23 +14,41 @@
 
   <title>pcars web viewer</title>
 </head>
-<body>
-  <button id="fireAjax" class="btn btn-primary">Fire Ajax</button>
-  <button id="startPolling" class="btn">Start Polling</button>
-  <button id="stopPolling"  class="btn" disabled>Stop Polling</button>
+<body>    
+  <hr />
+  
+  <div class="text-center">
+    <button id="fireAjax" class="btn btn-primary">Fire Ajax</button>
+    <button id="startPolling" class="btn btn-danger">Record</button>
+    <button id="stopPolling"  class="btn btn-default" disabled>Stop Recording</button>
+    <button id="dumpResultsArray" class="btn btn-primary">Dump Results Array</button>
+    <button id="loadSampleResultsArray" class="btn btn-primary">Load Sample Results Array</button>
+  </div>
   
   <hr />
+
+  <div>
+
+  </div>
   
   <div>
     <h2>Status:</h2>
     <p id="status"></p>
+    <p>Result-Array-Size: <span id="resultsSize">0</span></p>
   </div>
 
   <hr />
 
   <div>
-    <h2>Response:</h2>
-    <pre id="response"></pre>
+    <h2>Last Response <button class="btn" data-toggle="collapse" data-target="#response">Show/Hide</button></h2>    
+    <pre id="response" class="collapse in">empty</pre>
+  </div>
+  
+  <hr />
+
+  <div>
+    <h2>Results Array Dump <button class="btn" data-toggle="collapse" data-target="#resultsArrayDump">Show/Hide</button></h2>
+    <pre id="resultsArrayDump" class="collapse in">empty</pre>
   </div>
 </body>
 </html>

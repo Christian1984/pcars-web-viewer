@@ -6,10 +6,25 @@
   let pollingDelay = 1000;
   var intervalId = undefined;
   var requestId = 0;
+
+  var results = [];
   
   function log(msg) {  
     console.log(msg);
     $('#status').text(msg);
+  }
+
+  function updateResults(data) {
+    results.push(data);
+    $('#resultsSize').text(results.length);
+  }
+
+  function dumpResults() {
+    $("#resultsArrayDump").text(JSON.stringify(results, null, 4));
+  }
+
+  function loadSampleResults() {
+
   }
 
   function startPolling() {
@@ -35,8 +50,8 @@
     // fire a request against the api, docs at
     // https://github.com/NLxAROSA/CREST/tree/master
 
-    params = undefined;
-    //params = 'buildInfo=true';
+    //params = undefined;
+    params = 'participants=true';
 
     log('Sending Request ' + id + '...');
     $.ajax({
@@ -47,6 +62,7 @@
         log('Request ' + id + ': Response received, Status: ' + textStatus);
         $('#response').text(JSON.stringify(data, null, 4));
         console.log(data);
+        updateResults(data);
       }
     });
   }
@@ -66,6 +82,9 @@
       $('#startPolling').prop('disabled', false);
       $('#stopPolling').prop('disabled', true);
       stopPolling();
-    })
+    });
+
+    $("#dumpResultsArray").click(() => dumpResults());    
+    $("#loadSampleResultsArray").click(loadSampleResults);
   });
 })();

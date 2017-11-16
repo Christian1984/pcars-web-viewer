@@ -7,9 +7,11 @@
 
   <script src="./js/jquery-3.2.1.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/chartist.min.js"></script>
   <script src="./js/pcars.js"></script>
 
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/chartist.min.css" rel="stylesheet">
   <link href="css/pcars.css" rel="stylesheet">
 
   <title>pcars web viewer</title>
@@ -28,11 +30,17 @@
   <hr />
 
   <div>
+    <h2>Chart</h2>
+    <div class="chart">
+      <div class="ct-chart"></div>
+    </div>
 
   </div>
   
+  <hr />
+  
   <div>
-    <h2>Status:</h2>
+    <h2>Status</h2>
     <p id="status"></p>
     <p>Result-Array-Size: <span id="resultsSize">0</span></p>
   </div>

@@ -10,17 +10,16 @@
   var results = [];
   let posData = {};
   
-  function log(msg) {  
-    console.log(msg);
+  function log(msg) {
     $('#status').text(msg);
   }
 
   function random255() {
-    return Math.random() * 256;
+    return Math.floor(Math.random() * 256);
   }
 
-  function randomRgbaString() {
-    return 'rgb(' + random255() + ', ' + random255() + ', ' + random255() + ',0)'
+  function randomRgbString() {
+    return 'rgb(' + random255() + ', ' + random255() + ', ' + random255() + ')'
   }
 
   function updateResults(data) {
@@ -43,6 +42,7 @@
         if (!series) {
           series = {
             label: driverName,
+            backgroundColor: 'rgba(0,0,0,0)',
             borderColor: randomRgbString(),
             data: []
           };
@@ -74,13 +74,15 @@
     
         // The data for our dataset
         data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            /*labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [{
                 label: "My First dataset",
                 backgroundColor: 'rgba(0,0,0,0)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: [0, 10, 5, 2, 20, 30, 45],
-            }]
+            }]*/
+            labels: posData.time,
+            datasets: posData.series
         },
     
         // Configuration options go here
@@ -128,7 +130,6 @@
       success: (data, textStatus, jqXHR) => {
         log('Request ' + id + ': Response received, Status: ' + textStatus);
         $('#response').text(JSON.stringify(data, null, 4));
-        console.log(data);
         updateResults(data);
       }
     });

@@ -19,7 +19,7 @@
   }
 
   function randomRgbString() {
-    return 'rgb(' + random255() + ', ' + random255() + ', ' + random255() + ')'
+    return 'rgb(' + random255() + ', ' + random255() + ', ' + random255() + ')';
   }
 
   function updateResults(data) {
@@ -74,12 +74,18 @@
     
         // The data for our dataset
         data: {
-            /*labels: ["January", "February", "March", "April", "May", "June", "July"],
+            /*labels: [1, 2, 3, 7, 5, 6, 4],
             datasets: [{
-                label: "My First dataset",
+                label: "1",
                 backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45],
+                borderColor: randomRgbString(),
+                data: [1, 2, 3, 4, 3, 2, 1],
+            },
+            {
+              label: "2",
+              backgroundColor: 'rgba(0,0,0,0)',
+              borderColor: randomRgbString(),
+              data: [4, 3, 2, 1, 2, 3, 4],
             }]*/
             labels: posData.time,
             datasets: posData.series

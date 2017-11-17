@@ -719,7 +719,7 @@ let samplePosData = {
     "series": [
         {
             "label": "Marcel_J8",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(87, 215, 100)",
             "data": [
                 3,
@@ -1441,7 +1441,7 @@ let samplePosData = {
         },
         {
             "label": "Saufi11",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(150, 121, 250)",
             "data": [
                 7,
@@ -2163,7 +2163,7 @@ let samplePosData = {
         },
         {
             "label": "BE2k13",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(193, 210, 166)",
             "data": [
                 5,
@@ -2885,7 +2885,7 @@ let samplePosData = {
         },
         {
             "label": "peterboege",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(34, 68, 182)",
             "data": [
                 6,
@@ -3607,7 +3607,7 @@ let samplePosData = {
         },
         {
             "label": "Mike Nice",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(156, 232, 152)",
             "data": [
                 17,
@@ -4329,7 +4329,7 @@ let samplePosData = {
         },
         {
             "label": "PimboEen",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(15, 226, 138)",
             "data": [
                 2,
@@ -5051,7 +5051,7 @@ let samplePosData = {
         },
         {
             "label": "Hitschi",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(152, 127, 23)",
             "data": [
                 10,
@@ -5773,7 +5773,7 @@ let samplePosData = {
         },
         {
             "label": "ChrisVomRhein",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(69, 56, 4)",
             "data": [
                 14,
@@ -6495,7 +6495,7 @@ let samplePosData = {
         },
         {
             "label": "JenzJenzen",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(231, 242, 127)",
             "data": [
                 1,
@@ -7217,7 +7217,7 @@ let samplePosData = {
         },
         {
             "label": "stoffivv16",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(111, 223, 145)",
             "data": [
                 15,
@@ -7939,7 +7939,7 @@ let samplePosData = {
         },
         {
             "label": "Stefan Henkel",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(71, 204, 45)",
             "data": [
                 16,
@@ -8661,7 +8661,7 @@ let samplePosData = {
         },
         {
             "label": "Oliver Jank",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(181, 138, 38)",
             "data": [
                 4,
@@ -10098,7 +10098,7 @@ let samplePosData = {
         },
         {
             "label": "Chris Egenolf",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(214, 160, 196)",
             "data": [
                 9,
@@ -10820,7 +10820,7 @@ let samplePosData = {
         },
         {
             "label": "greyhardy.ger",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(105, 29, 195)",
             "data": [
                 12,
@@ -11542,7 +11542,7 @@ let samplePosData = {
         },
         {
             "label": "=AS=",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(53, 0, 247)",
             "data": [
                 13,
@@ -12264,7 +12264,7 @@ let samplePosData = {
         },
         {
             "label": "sven.suchi",
-            "backgroundColor": "rgba(0,0,0,0)",
+            
             "borderColor": "rgb(7, 50, 83)",
             "data": [
                 8,

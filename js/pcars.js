@@ -42,7 +42,7 @@
         if (!series) {
           series = {
             label: driverName,
-            backgroundColor: 'rgba(0,0,0,0)',
+            //backgroundColor: 'rgba(0,0,0,0)',
             borderColor: randomRgbString(),
             data: []
           };
@@ -74,19 +74,6 @@
     
         // The data for our dataset
         data: {
-            /*labels: [1, 2, 3, 7, 5, 6, 4],
-            datasets: [{
-                label: "1",
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: randomRgbString(),
-                data: [1, 2, 3, 4, 3, 2, 1],
-            },
-            {
-              label: "2",
-              backgroundColor: 'rgba(0,0,0,0)',
-              borderColor: randomRgbString(),
-              data: [4, 3, 2, 1, 2, 3, 4],
-            }]*/
             labels: posData.time,
             datasets: posData.series
         },
@@ -95,7 +82,10 @@
         options: {
           elements: {
             point: {
-                radius: 0
+              radius: 0
+            },
+            line: {
+              backgroundColor: 'rgba(0,0,0,0)',
             }
         }
         }

@@ -15,6 +15,14 @@
     $('#status').text(msg);
   }
 
+  function random255() {
+    return Math.random() * 256;
+  }
+
+  function randomRgbaString() {
+    return 'rgb(' + random255() + ', ' + random255() + ', ' + random255() + ',0)'
+  }
+
   function updateResults(data) {
     //store raw data (for debugging)
     results.push(data);
@@ -29,11 +37,20 @@
       let participants = data.participants.mParticipantInfo;
       
       for (var i = 0; i < participants.length; i++) {
-        if (posData.series.length <= i) {
-          posData.series.push([]);
+        let driverName = participants[i].mName;
+        var series = posData.series.find(series => series.label == driverName);
+
+        if (!series) {
+          series = {
+            label: driverName,
+            borderColor: randomRgbString(),
+            data: []
+          };
+
+          posData.series.push(series);
         }
         
-        posData.series[i].push(participants[i].mRacePosition);
+        series.data.push(participants[i].mRacePosition);
       }
     }
   }
@@ -41,14 +58,10 @@
   function dumpResults() {
     $("#resultsArrayDump").text(JSON.stringify(results, null, 4));
     $("#chartistSourceArrayDump").text(JSON.stringify(posData, null, 4));
-
-    console.log("posData.time.length", posData.time.length);
-    console.log("posData.series.length", posData.series.length);
-    console.log("posData.series[0].length", posData.series[0].length);
   }
 
   function loadSampleResults() {
-    results = sampleArray;
+    results = sampleRawDataArray;
     posData = samplePosData;
     dumpResults();
   }
@@ -64,14 +77,20 @@
             labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [{
                 label: "My First dataset",
-                //backgroundColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(0,0,0,0)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: [0, 10, 5, 2, 20, 30, 45],
             }]
         },
     
         // Configuration options go here
-        options: {}
+        options: {
+          elements: {
+            point: {
+                radius: 0
+            }
+        }
+        }
     });
   }
 

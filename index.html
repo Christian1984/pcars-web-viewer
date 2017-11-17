@@ -26,13 +26,14 @@
     <button id="stopPolling"  class="btn btn-default" disabled>Stop Recording</button>
     <button id="dumpResultsArray" class="btn btn-primary">Dump Results Array</button>
     <button id="loadSampleResultsArray" class="btn btn-primary">Load Sample Results Array</button>
+    <button id="drawChart" class="btn btn-primary">Draw Chart</button>
   </div>
   
   <hr />
 
   <div>
-    <h2>Chart</h2>
-    <div class="chart">
+    <h2>Chart <button class="btn" data-toggle="collapse" data-target="#posChart">Show/Hide</button></h2>
+    <div id="posChart" class="chart collapse in">
       <div class="ct-chart"></div>
     </div>
 
@@ -50,14 +51,21 @@
 
   <div>
     <h2>Last Response <button class="btn" data-toggle="collapse" data-target="#response">Show/Hide</button></h2>    
-    <pre id="response" class="collapse in">empty</pre>
+    <pre id="response" class="collapse">empty</pre>
   </div>
   
   <hr />
 
   <div>
     <h2>Results Array Dump <button class="btn" data-toggle="collapse" data-target="#resultsArrayDump">Show/Hide</button></h2>
-    <pre id="resultsArrayDump" class="collapse in">empty</pre>
+    <pre id="resultsArrayDump" class="collapse">empty</pre>
+  </div>
+  
+  <hr />
+
+  <div>
+    <h2>Chartist Source Array Dump <button class="btn" data-toggle="collapse" data-target="#chartistSourceArrayDump">Show/Hide</button></h2>
+    <pre id="chartistSourceArrayDump" class="collapse">empty</pre>
   </div>
 </body>
 </html>

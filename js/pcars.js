@@ -8,6 +8,7 @@
   var requestId = 0;
 
   var results = [];
+  let posData = {};
   
   function log(msg) {  
     console.log(msg);
@@ -15,17 +16,61 @@
   }
 
   function updateResults(data) {
+    //store raw data (for debugging)
     results.push(data);
     $('#resultsSize').text(results.length);
+
+    //store data for charts
+    let time = data.timings.mCurrentTime;
+
+    if (time >= 0 && !posData.time.includes(time)) {
+      posData.time.push(time);
+
+      let participants = data.participants.mParticipantInfo;
+      
+      for (var i = 0; i < participants.length; i++) {
+        if (posData.series.length <= i) {
+          posData.series.push([]);
+        }
+        
+        posData.series[i].push(participants[i].mRacePosition);
+      }
+    }
   }
 
   function dumpResults() {
     $("#resultsArrayDump").text(JSON.stringify(results, null, 4));
+    $("#chartistSourceArrayDump").text(JSON.stringify(posData, null, 4));
+
+    console.log("posData.time.length", posData.time.length);
+    console.log("posData.series.length", posData.series.length);
+    console.log("posData.series[0].length", posData.series[0].length);
   }
 
   function loadSampleResults() {
     results = sampleArray;
+    posData = samplePosData;
     dumpResults();
+  }
+
+  function drawChart() {    
+    new Chartist.Line('.ct-chart', {
+      labels: posData.time,
+      series: posData.series,
+    }, {
+      fullWidth: true,
+      axisX: {
+        onlyInteger: true,
+        scaleMinSpace: 20,
+      },
+      axisY: {
+        onlyInteger: true
+      },
+      chartPadding: {
+        right: 40
+      },
+      height: '500px'
+    });
   }
 
   function startPolling() {
@@ -85,22 +130,11 @@
       stopPolling();
     });
 
-    $("#dumpResultsArray").click(() => dumpResults());    
+    $("#dumpResultsArray").click(() => dumpResults());  
     $("#loadSampleResultsArray").click(() => loadSampleResults());
-    
-    new Chartist.Line('.ct-chart', {
-      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      series: [
-        [12, 9, 7, 8, 5],
-        [2, 1, 3.5, 7, 3],
-        [1, 3, 4, 5, 6]
-      ]
-    }, {
-      fullWidth: true,
-      chartPadding: {
-        right: 40
-      },
-      height: '500px'
-    });
+    $("#drawChart").click(() => drawChart());
+
+    posData.time = [];
+    posData.series = [];
   });
 })();

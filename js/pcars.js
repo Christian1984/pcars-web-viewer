@@ -14,6 +14,19 @@
     $('#status').text(msg);
   }
 
+  function addLeadingZero(val) {
+    return val < 10 ? `0${val}` : val;
+  }
+  
+  function getTimerStringFromSeconds(seconds) {
+
+    let hh = addLeadingZero(~~(seconds / 3600));
+    let mm = addLeadingZero(~~((seconds % 3600) / 60));
+    let ss = addLeadingZero(~~(seconds % 60));
+
+    return `${hh}:${mm}:${ss}`;
+  }
+
   function random255() {
     return Math.floor(Math.random() * 256);
   }
@@ -87,8 +100,18 @@
             line: {
               backgroundColor: 'rgba(0,0,0,0)',
             }
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              stepSize: 1,
+              callback: function(tickValue, index, ticks) {
+                return getTimerStringFromSeconds(tickValue);
+              }
+            }
+          }]
         }
-        }
+      }
     });
   }
 

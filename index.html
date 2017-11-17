@@ -7,12 +7,11 @@
 
   <script src="./js/jquery-3.2.1.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
-  <script src="./js/chartist.min.js"></script>
+  <script src="./js/chart.bundle.min.js"></script>
   <script src="./js/sampleArray.js"></script>
   <script src="./js/pcars.js"></script>
 
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/chartist.min.css" rel="stylesheet">
   <link href="css/pcars.css" rel="stylesheet">
 
   <title>pcars web viewer</title>
@@ -33,8 +32,8 @@
 
   <div>
     <h2>Chart <button class="btn" data-toggle="collapse" data-target="#posChart">Show/Hide</button></h2>
-    <div id="posChart" class="chart collapse in">
-      <div class="ct-chart"></div>
+    <div id="posChart" class="chart collapse">
+      <canvas id="posChartCanvas"></canvas>
     </div>
 
   </div>

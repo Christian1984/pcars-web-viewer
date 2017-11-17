@@ -24,7 +24,8 @@
   }
 
   function loadSampleResults() {
-
+    results = sampleArray;
+    dumpResults();
   }
 
   function startPolling() {
@@ -51,7 +52,7 @@
     // https://github.com/NLxAROSA/CREST/tree/master
 
     //params = undefined;
-    params = 'participants=true';
+    params = 'participants=true&eventInformation=true&timings=true';
 
     log('Sending Request ' + id + '...');
     $.ajax({

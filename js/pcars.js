@@ -7,8 +7,12 @@
   var intervalId = undefined;
   var requestId = 0;
 
-  var results = [];
   let posData = {};
+
+  var resultIndex = 0;
+  var results = [];
+
+  var chart = undefined;
   
   function log(msg) {
     $('#status').text(msg);
@@ -35,10 +39,13 @@
     return 'rgb(' + random255() + ', ' + random255() + ', ' + random255() + ')';
   }
 
-  function updateResults(data) {
+  function updateResults(data, updateRaw = false) {
     //store raw data (for debugging)
-    results.push(data);
-    $('#resultsSize').text(results.length);
+
+    if (updateRaw) {
+      results.push(data);
+      $('#resultsSize').text(results.length);
+    }
 
     //store data for charts
     let time = data.timings.mCurrentTime;
@@ -63,25 +70,37 @@
           posData.series.push(series);
         }
         
-        series.data.push(participants[i].mRacePosition);
+        series.data.push(-participants[i].mRacePosition);
+      }
+
+      //update chart
+      if (!chart) {
+        drawChart();
+      }
+      else {
+        updateChart();
       }
     }
   }
 
   function dumpResults() {
     $("#resultsArrayDump").text(JSON.stringify(results, null, 4));
+
+    //cleanup when recorded data from test array
+    posData.series.forEach((e) => {
+      delete e._meta;
+    });
     $("#chartistSourceArrayDump").text(JSON.stringify(posData, null, 4));
   }
 
   function loadSampleResults() {
     results = sampleRawDataArray;
     posData = samplePosData;
-    dumpResults();
   }
 
   function drawChart() {
     var ctx = document.getElementById('posChartCanvas').getContext('2d');
-    var chart = new Chart(ctx, {
+    chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
     
@@ -99,6 +118,7 @@
             },
             line: {
               backgroundColor: 'rgba(0,0,0,0)',
+              tension: 0
             }
         },
         scales: {
@@ -109,10 +129,28 @@
                 return getTimerStringFromSeconds(tickValue);
               }
             }
+          }],
+          yAxes: [{
+            ticks: {
+              stepSize: 1,
+              beginAtZero: true,
+              suggestedMin: -posData.series.length - 1,
+              callback: function(tickValue, index, ticks) {
+                if (tickValue === 0) {
+                  return '';
+                }
+
+                return -tickValue;
+              }
+            }
           }]
         }
       }
     });
+  }
+
+  function updateChart() {
+    chart.update();
   }
 
   function startPolling() {
@@ -149,7 +187,7 @@
       success: (data, textStatus, jqXHR) => {
         log('Request ' + id + ': Response received, Status: ' + textStatus);
         $('#response').text(JSON.stringify(data, null, 4));
-        updateResults(data);
+        updateResults(data, true);
       }
     });
   }
@@ -174,6 +212,24 @@
     $("#dumpResultsArray").click(() => dumpResults());  
     $("#loadSampleResultsArray").click(() => loadSampleResults());
     $("#drawChart").click(() => drawChart());
+    $("#updateChart").click(() => updateChart());
+
+    $('#recFromArray').click(() => {
+      $('#recFromArray').prop('disabled', true);
+
+      posData = {time: [], series: []};
+      resultIndex = 0;
+
+      var interval = setInterval(() => {
+        if (resultIndex < results.length) {
+          updateResults(results[resultIndex], false);
+          resultIndex++;
+        }
+        else {
+          clearInterval(interval);
+        }
+      }, pollingDelay / 1000);
+    });
 
     posData.time = [];
     posData.series = [];

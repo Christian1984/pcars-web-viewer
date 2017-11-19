@@ -21,19 +21,26 @@
   <hr />
   
   <div class="text-center">
-    <button id="fireAjax" class="btn btn-primary">Fire Ajax</button>
     <button id="startPolling" class="btn btn-danger">Record</button>
     <button id="stopPolling"  class="btn btn-default" disabled>Stop Recording</button>
+  </div>
+
+  <hr />
+  
+  <div class="text-center">
+    <button id="fireAjax" class="btn btn-primary">Fire Ajax</button>
     <button id="dumpResultsArray" class="btn btn-primary">Dump Results Array</button>
     <button id="loadSampleResultsArray" class="btn btn-primary">Load Sample Results Array</button>
-    <button id="drawChart" class="btn btn-primary">Draw Chart</button>
+    <button id="drawChart" class="btn btn-default">Draw Chart</button>
+    <button id="updateChart" class="btn btn-default">Update Chart</button>
+    <button id="recFromArray" class="btn btn-danger">Record From Result Array</button>
   </div>
   
   <hr />
 
   <div>
     <h2>Chart <button class="btn" data-toggle="collapse" data-target="#posChart">Show/Hide</button></h2>
-    <div id="posChart" class="chart collapse">
+    <div id="posChart" class="chart collapse in">
       <canvas id="posChartCanvas"></canvas>
     </div>
 

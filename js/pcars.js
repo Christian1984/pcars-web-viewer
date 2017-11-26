@@ -266,6 +266,12 @@
       initChart();
     });
 
+    $('#saveData').click(() => {
+      var data = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(posData));
+      $('#downloadLink').attr('href', data);
+      $('#downloadLink').attr('download', 'pstats-' + Date.now() + '.json');
+    });
+
     $("#dumpResultsArray").click(() => dumpResults());  
     $("#loadSampleResultsArray").click(() => loadSampleResults());
     $("#drawChart").click(() => initChart());

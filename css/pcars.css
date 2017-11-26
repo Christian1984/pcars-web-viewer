@@ -8,11 +8,11 @@
   opacity: 0;
   max-width: 0;
   display: inline-block;
-  transition: max-width .5s ease-out, opacity .5s ease-out;
+  transition: max-width .5s ease-in-out, opacity .5s ease-in-out;
 }
 
 .hover-expandable:hover .hover-expand {
   opacity: 1;
-  max-width: 150px;
-  transition: max-width .5s ease-out, opacity .5s ease-out;
+  max-width: 250px;
+  transition: max-width .5s ease-in-out, opacity .5s ease-in-out;
 }

@@ -75,7 +75,7 @@
 
       //update chart
       if (!chart) {
-        drawChart();
+        initChart();
       }
       else {
         updateChart();
@@ -98,7 +98,7 @@
     posData = samplePosData;
   }
 
-  function drawChart() {
+  function initChart() {
     var ctx = document.getElementById('posChartCanvas').getContext('2d');
     chart = new Chart(ctx, {
         // The type of chart we want to create
@@ -151,6 +151,23 @@
 
   function updateChart() {
     chart.update();
+  }
+
+  function recordDataFromSampleData() {
+    posData = {time: [], series: []};
+    initChart();
+
+    resultIndex = 0;
+
+    var interval = setInterval(() => {
+      if (resultIndex < results.length) {
+        updateResults(results[resultIndex], false);
+        resultIndex++;
+      }
+      else {
+        clearInterval(interval);
+      }
+    }, pollingDelay / 100);
   }
 
   function startPolling() {
@@ -211,29 +228,13 @@
 
     $("#dumpResultsArray").click(() => dumpResults());  
     $("#loadSampleResultsArray").click(() => loadSampleResults());
-    $("#drawChart").click(() => drawChart());
+    $("#drawChart").click(() => initChart());
     $("#updateChart").click(() => updateChart());
-
-    $('#recFromArray').click(() => {
-      $('#recFromArray').prop('disabled', true);
-
-      posData = {time: [], series: []};
-      resultIndex = 0;
-
-      var interval = setInterval(() => {
-        if (resultIndex < results.length) {
-          updateResults(results[resultIndex], false);
-          resultIndex++;
-        }
-        else {
-          clearInterval(interval);
-        }
-      }, pollingDelay / 1000);
-    });
+    $('#recFromArray').click(() => recordDataFromSampleData());
 
     posData.time = [];
     posData.series = [];
-    
-    drawChart();
+
+    initChart();
   });
 })();

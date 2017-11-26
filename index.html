@@ -36,7 +36,9 @@
                 <span class="glyphicon glyphicon-stop" aria-hidden="true"></span><span class="hover-expand">&nbsp;Stop</span>
               </button>
               
-              <button type="button" id="deleteRecording" class="btn btn-warning navbar-btn hover-expandable" disabled>
+              <button type="button" id="deleteRecording" 
+                class="btn btn-warning navbar-btn hover-expandable" 
+                data-toggle="modal" data-target="#deleteRecordingModal">
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="hover-expand">&nbsp;Reset</span>
               </button>
             </div>
@@ -75,9 +77,9 @@
   <div class="container">  
     <div>
       <h2>Position&nbsp;
-        <button class="btn" data-toggle="collapse" data-target="#posChart">
+        <!--<button class="btn" data-toggle="collapse" data-target="#posChart">
           <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>/<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
-        </button>
+        </button>-->
       </h2>
       <div id="posChart" class="chart collapse in">
         <canvas id="posChartCanvas"></canvas>
@@ -125,6 +127,33 @@
       <pre id="chartistSourceArrayDump" class="collapse">empty</pre>
     </div>
   </div>
+
+<!-- Modal Dialogs -->
+
+<!-- Recording Delete Modal -->
+<div id="deleteRecordingModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> Are you sure?</h4>
+      </div>
+      <div class="modal-body">
+        <p><strong>Warning:</strong> You are about to delete all unsaved data. Do you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
+        </button>
+        <button id="deleteRecordingVerified" type="button" class="btn btn-danger" data-dismiss="modal">
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

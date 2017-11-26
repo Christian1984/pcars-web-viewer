@@ -244,7 +244,17 @@
     $('#stopPolling').click(() => {
       $('#startPolling').prop('disabled', false);
       $('#stopPolling').prop('disabled', true);
+      $('#deleteRecording').prop('disabled', false);
       stopPolling();
+    });
+
+    $('#deleteRecordingVerified').click(() => {
+      $('#deleteRecording').prop('disabled', true);
+
+      posData.time = [];
+      posData.series = [];
+
+      initChart();
     });
 
     $("#dumpResultsArray").click(() => dumpResults());  
@@ -256,7 +266,7 @@
     posData.time = [];
     posData.series = [];
 
-    loadSampleResults(); //only for testing!
+    //loadSampleResults(); //only for testing!
     initChart();
   });
 })();

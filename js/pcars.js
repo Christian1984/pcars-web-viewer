@@ -221,7 +221,16 @@
     $.ajax({
       url: 'http://' + server + ':' + port + uri + (params ? '?' + params : ''),
       async: true,
-      error: (jqXHR, status, error) => log('Request ' + id + ': An Error occured! Status: ' + status + ', Message: ' + error),
+      error: (jqXHR, status, error) => {
+        $('#serverNotRunningModal').modal();
+
+        $('#startPolling').prop('disabled', false);
+        $('#stopPolling').prop('disabled', true);
+        $('#deleteRecording').prop('disabled', false);
+        stopPolling();
+
+        log('Request ' + id + ': An Error occured! Status: ' + status + ', Message: ' + error);
+      },
       success: (data, textStatus, jqXHR) => {
         log('Request ' + id + ': Response received, Status: ' + textStatus);
         $('#response').text(JSON.stringify(data, null, 4));

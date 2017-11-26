@@ -163,7 +163,8 @@
             // Zooming directions. Remove the appropriate direction to disable 
             // Eg. 'y' would only allow zooming in the y direction
             mode: 'x',
-            sensitivity: 1
+            sensitivity: 0.1,
+            velocity: 5
         }
       }
     });

@@ -40,7 +40,8 @@
 		zoom: {
 			enabled: true,
 			mode: 'xy',
-			sensitivity: 3
+			sensitivity: 3,
+			velocity: 5
 		}
 	};
 	
@@ -82,31 +83,32 @@
 		var sensitivity = zoomOptions.sensitivity;
 		var chartCenter =  scale.isHorizontal() ? scale.left + (scale.width/2) : scale.top + (scale.height/2);
 		var centerPointer = scale.isHorizontal() ? center.x : center.y;
+		let velocity = zoomOptions.velocity ? zoomOptions.velocity : defaultOptions.zoom.velocity;
 	
 		zoomNS.zoomCumulativeDelta = zoom > 1 ? zoomNS.zoomCumulativeDelta + 1 : zoomNS.zoomCumulativeDelta - 1;
 	
 		if (Math.abs(zoomNS.zoomCumulativeDelta) > sensitivity){
 			if(zoomNS.zoomCumulativeDelta < 0){
-				if(centerPointer <= chartCenter){
+				if(centerPointer >= chartCenter){
 					if (minIndex <= 0){
-						maxIndex = Math.min(lastLabelIndex, maxIndex + 1);
+						maxIndex = Math.min(lastLabelIndex, maxIndex + velocity);
 					} else{
-						minIndex = Math.max(0, minIndex - 1);
+						minIndex = Math.max(0, minIndex - velocity);
 					}
-				} else if(centerPointer > chartCenter){
+				} else if(centerPointer < chartCenter){
 					if (maxIndex >= lastLabelIndex){
-						minIndex = Math.max(0, minIndex - 1);
+						minIndex = Math.max(0, minIndex - velocity);
 					} else{
-						maxIndex = Math.min(lastLabelIndex, maxIndex + 1);
+						maxIndex = Math.min(lastLabelIndex, maxIndex + velocity);
 					}
 				}
 				zoomNS.zoomCumulativeDelta = 0;
 			}
 			else if(zoomNS.zoomCumulativeDelta > 0){
-				if(centerPointer <= chartCenter){
-					minIndex = minIndex < maxIndex ? minIndex = Math.min(maxIndex, minIndex + 1) : minIndex;
-				} else if(centerPointer > chartCenter){
-					maxIndex = maxIndex > minIndex ? maxIndex = Math.max(minIndex, maxIndex - 1) : maxIndex;
+				if(centerPointer >= chartCenter){
+					minIndex = minIndex < maxIndex ? minIndex = Math.min(maxIndex, minIndex + velocity) : minIndex;
+				} else if(centerPointer < chartCenter){
+					maxIndex = maxIndex > minIndex ? maxIndex = Math.max(minIndex, maxIndex - velocity) : maxIndex;
 				}
 				zoomNS.zoomCumulativeDelta = 0;
 			}

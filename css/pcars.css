@@ -1,0 +1,18 @@
+.hover-expandable {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.hover-expandable .hover-expand {
+  opacity: 0;
+  max-width: 0;
+  display: inline-block;
+  transition: max-width .5s ease-out, opacity .5s ease-out;
+}
+
+.hover-expandable:hover .hover-expand {
+  opacity: 1;
+  max-width: 150px;
+  transition: max-width .5s ease-out, opacity .5s ease-out;
+}

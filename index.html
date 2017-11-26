@@ -17,16 +17,26 @@
 
   <title>pcars web viewer</title>
 </head>
-<body>    
-  <hr />
-  
-  <div class="text-center">
-    <button id="startPolling" class="btn btn-danger">Record</button>
-    <button id="stopPolling"  class="btn btn-default" disabled>Stop Recording</button>
+<body> 
+  <!--<div class="navbar navbar-default navbar-fixed-top">-->
+  <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <a href = "#" class="navbar-brand">pcars web viewer</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li>
+        <button type="button" id="startPolling" class="btn btn-danger navbar-btn hover-expandable">
+          <span class="glyphicon glyphicon-record" aria-hidden="true"></span><span class="hover-expand">&nbsp;Record</span>
+        </button>
+        <button type="button" id="stopPolling" class="btn btn-default navbar-btn hover-expandable" disabled>
+          <span class="glyphicon glyphicon-stop" aria-hidden="true"></span><span class="hover-expand">&nbsp;Stop Recording</span>
+        </button>  
+      </li>
+    </ul>
   </div>
 
   <hr />
-  
+
   <div class="text-center">
     <button id="fireAjax" class="btn btn-primary">Fire Ajax</button>
     <button id="dumpResultsArray" class="btn btn-primary">Dump Results Array</button>

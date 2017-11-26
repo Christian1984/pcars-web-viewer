@@ -233,5 +233,7 @@
 
     posData.time = [];
     posData.series = [];
+    
+    drawChart();
   });
 })();

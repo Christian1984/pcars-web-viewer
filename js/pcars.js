@@ -12,6 +12,8 @@
   var resultIndex = 0;
   var results = [];
 
+  var fileToUpload;
+
   var chart = undefined;
   
   function log(msg) {
@@ -98,6 +100,14 @@
     posData = samplePosData;
   }
 
+  function updateData() {
+    chart.data = {
+      labels: posData.time,
+      datasets: posData.series
+    };
+    updateChart();
+  }
+
   function initChart() {
     var ctx = document.getElementById('posChartCanvas').getContext('2d');
     chart = new Chart(ctx, {
@@ -176,7 +186,7 @@
 
   function recordDataFromSampleData() {
     posData = {time: [], series: []};
-    initChart();
+    updateData();
 
     resultIndex = 0;
 
@@ -239,6 +249,22 @@
     });
   }
 
+  function handleFileSelect(evt) {
+    $('#uploadFile').prop('disabled', true);
+
+    var files = evt.target.files; // FileList object
+    if (files.length < 1) return;
+
+    // files is a FileList of File objects. List some properties.
+    fileToUpload = files[0];
+
+    $('#fileDetails').html('<strong>' + escape(fileToUpload.name) + '</strong> (' 
+      + (fileToUpload.type || 'n/a') + ') - ' + fileToUpload.size + ' bytes, last modified: ' 
+      + (fileToUpload.lastModifiedDate ? fileToUpload.lastModifiedDate.toLocaleDateString() : 'n/a'));
+
+    $('#uploadFile').prop('disabled', false);
+  }
+
   $(document).ready(() => {
     $('#fireAjax').click(() => {
       sendRequest();
@@ -262,8 +288,7 @@
 
       posData.time = [];
       posData.series = [];
-
-      initChart();
+      updateData();
     });
 
     $('#saveData').click(() => {
@@ -272,9 +297,39 @@
       $('#downloadLink').attr('download', 'pstats-' + Date.now() + '.json');
     });
 
+    $('#files').change(handleFileSelect);
+
+    $('#uploadFile').click(() => {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        try {
+          let candidate = JSON.parse(reader.result);
+          if (candidate.time && candidate.series) {
+            posData.time = candidate.time;
+            posData.series = candidate.series;
+            updateData();
+          }
+        }
+        catch (e) {
+          $('#fileUploadErrorModal').modal();
+          console.log(e);
+          console.log("error");
+        }
+      }
+
+      reader.readAsText(fileToUpload);
+    });
+    
+    $('#openLoadDataModal').click(() => {
+      $('#uploadFile').prop('disabled', !fileToUpload);
+    });
+
+    window.addEventListener("resize", () => updateData());
+
     $("#dumpResultsArray").click(() => dumpResults());  
     $("#loadSampleResultsArray").click(() => loadSampleResults());
-    $("#drawChart").click(() => initChart());
+    $("#drawChart").click(() => updateData());
     $("#updateChart").click(() => updateChart());
     $('#recFromArray').click(() => recordDataFromSampleData());
 

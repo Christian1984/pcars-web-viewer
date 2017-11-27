@@ -50,7 +50,9 @@
                 <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span><span class="hover-expand">&nbsp;Save</span>
               </button>
 
-              <button type="button" id="loadData" class="btn btn-primary navbar-btn hover-expandable">
+              <button type="button" id="openLoadDataModal" 
+                class="btn btn-primary navbar-btn hover-expandable"
+                data-toggle="modal" data-target="#fileUploadModal">
                 <span class="glyphicon glyphicon-open" aria-hidden="true"></span><span class="hover-expand">&nbsp;Load</span>
               </button>
             </div>
@@ -189,11 +191,62 @@
         <h4 class="modal-title"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save Recording</h4>
       </div>
       <div class="modal-body">
-        <div class="col-md-4 text-center">
+        <div class="text-center">
           <p>Please click the button below to download your recording...</p>
           <a href="#" id="downloadLink" type="button" class="btn btn-success">
             <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Download
           </a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- File Upload Modal -->
+<div id="fileUploadModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><span class="glyphicon glyphicon-open" aria-hidden="true"></span> Load Recording</h4>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <p>Select File...</p>
+          <input type="file" id="files" name="files[]" />
+          <p id="fileDetails"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
+        </button>
+        <button id="uploadFile" type="button" class="btn btn-success" data-dismiss="modal">
+          <span class="glyphicon glyphicon-open" aria-hidden="true"></span> Load
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- File Load Error Modal -->
+<div id="fileUploadErrorModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Could Not Load File</h4>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <p><strong>An Error Occured:</strong> The file is not a valid json file!</p>
         </div>
       </div>
       <div class="modal-footer">

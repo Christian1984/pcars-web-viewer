@@ -307,8 +307,10 @@
           let candidate = JSON.parse(reader.result);
           if (candidate.time && candidate.series) {
             posData.time = candidate.time;
-            posData.series = candidate.series;
+            posData.series = candidate.series;            
             updateData();
+            
+            $('#deleteRecording').prop('disabled', false);
           }
         }
         catch (e) {
